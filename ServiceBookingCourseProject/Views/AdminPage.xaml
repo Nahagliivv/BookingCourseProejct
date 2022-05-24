@@ -33,7 +33,7 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn  DisplayMemberBinding="{Binding Path= ID}" Width="40">Id</GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Description}" Width="160">Описание</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Width="160">Название</GridViewColumn>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Type}" Width="60">Id Вида</GridViewColumn>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Capacity}" Width="110">Вместимость(чел.)</GridViewColumn>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=StartDate}" Width="110">Дата начала</GridViewColumn>
@@ -177,7 +177,7 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <TextBox Background="White" x:Name="TextBоxDescriptionService" Text=""  HorizontalAlignment="Left" Height="25" TextWrapping="Wrap"  VerticalAlignment="Top" Width="453" Margin="950,470,0,0"  FontSize="15">
+        <TextBox Background="White" x:Name="TextBоxName" Text=""  HorizontalAlignment="Left" Height="25" TextWrapping="Wrap"  VerticalAlignment="Top" Width="453" Margin="950,467,0,0"  FontSize="15">
             <TextBox.Template>
                 <ControlTemplate>
                     <Border CornerRadius="12" Padding="2" BorderThickness="1" BorderBrush="#000000" Background="White">
@@ -186,9 +186,7 @@
                 </ControlTemplate>
             </TextBox.Template>
         </TextBox>
-        <Label Content="Описание услуги:" HorizontalAlignment="Left" Margin="839,468,0,0" VerticalAlignment="Top"/>
-        <Label Content="Id вида услуги:" HorizontalAlignment="Left" Margin="839,506,0,0" VerticalAlignment="Top"/>
-        <TextBox Background="White" x:Name="TextBоxTypeId" Text=""  HorizontalAlignment="Left" Height="25" TextWrapping="Wrap"  VerticalAlignment="Top" Width="98" Margin="950,508,0,0"  FontSize="15">
+        <TextBox Background="White" x:Name="TextBоxDescriptionService" Text=""  HorizontalAlignment="Left" Height="25" TextWrapping="Wrap"  VerticalAlignment="Top" Width="453" Margin="950,503,0,0"  FontSize="15">
             <TextBox.Template>
                 <ControlTemplate>
                     <Border CornerRadius="12" Padding="2" BorderThickness="1" BorderBrush="#000000" Background="White">
@@ -197,8 +195,9 @@
                 </ControlTemplate>
             </TextBox.Template>
         </TextBox>
-        <Label Content="Вместимость(чел.):" HorizontalAlignment="Left" Margin="839,547,0,0" VerticalAlignment="Top"/>
-        <TextBox Background="White" x:Name="TextBоxCapacityHuman" Text=""  HorizontalAlignment="Left" Height="25" TextWrapping="Wrap"  VerticalAlignment="Top" Width="98" Margin="950,547,0,0"  FontSize="15">
+        <Label Content="Описание услуги:" HorizontalAlignment="Left" Margin="839,501,0,0" VerticalAlignment="Top"/>
+        <Label Content="Id вида услуги:" HorizontalAlignment="Left" Margin="839,539,0,0" VerticalAlignment="Top"/>
+        <TextBox Background="White" x:Name="TextBоxTypeId" Text=""  HorizontalAlignment="Left" Height="25" TextWrapping="Wrap"  VerticalAlignment="Top" Width="98" Margin="950,541,0,0"  FontSize="15">
             <TextBox.Template>
                 <ControlTemplate>
                     <Border CornerRadius="12" Padding="2" BorderThickness="1" BorderBrush="#000000" Background="White">
@@ -207,10 +206,20 @@
                 </ControlTemplate>
             </TextBox.Template>
         </TextBox>
-        <DatePicker HorizontalAlignment="Left" Name="TimePickerStartDate" Margin="950,586,0,0" VerticalAlignment="Top" Width="128"/>
-        <Label Content="Дата начала:" HorizontalAlignment="Left" Margin="839,584,0,0" VerticalAlignment="Top"/>
-        <Label Content="Цена(руб.):" HorizontalAlignment="Left" Margin="839,623,0,0" VerticalAlignment="Top"/>
-        <TextBox Background="White" x:Name="TextBoxPrice" Text=""  HorizontalAlignment="Left" Height="25" TextWrapping="Wrap"  VerticalAlignment="Top" Width="98" Margin="950,623,0,0"  FontSize="15">
+        <Label Content="Вместимость(чел.):" HorizontalAlignment="Left" Margin="839,580,0,0" VerticalAlignment="Top"/>
+        <TextBox Background="White" x:Name="TextBоxCapacityHuman" Text=""  HorizontalAlignment="Left" Height="25" TextWrapping="Wrap"  VerticalAlignment="Top" Width="98" Margin="950,580,0,0"  FontSize="15">
+            <TextBox.Template>
+                <ControlTemplate>
+                    <Border CornerRadius="12" Padding="2" BorderThickness="1" BorderBrush="#000000" Background="White">
+                        <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
+                    </Border>
+                </ControlTemplate>
+            </TextBox.Template>
+        </TextBox>
+        <DatePicker HorizontalAlignment="Left" Name="TimePickerStartDate" Margin="950,619,0,0" VerticalAlignment="Top" Width="128"/>
+        <Label Content="Дата начала:" HorizontalAlignment="Left" Margin="839,617,0,0" VerticalAlignment="Top"/>
+        <Label Content="Цена(руб.):" HorizontalAlignment="Left" Margin="839,656,0,0" VerticalAlignment="Top"/>
+        <TextBox Background="White" x:Name="TextBoxPrice" Text=""  HorizontalAlignment="Left" Height="25" TextWrapping="Wrap"  VerticalAlignment="Top" Width="98" Margin="950,656,0,0"  FontSize="15">
             <TextBox.Template>
                 <ControlTemplate>
                     <Border CornerRadius="12" Padding="2" BorderThickness="1" BorderBrush="#000000" Background="White">
@@ -226,15 +235,15 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Button  Content="Добавить услугу" HorizontalAlignment="Left" Margin="839,668,0,0" VerticalAlignment="Top" Width="564" Height="25" IsDefault="True" Foreground="Black" FontSize="15" Background="white" Padding="0" Click="Button_Click_6">
+        <Button  Content="Добавить услугу" HorizontalAlignment="Left" Margin="839,761,0,0" VerticalAlignment="Top" Width="564" Height="25" IsDefault="True" Foreground="Black" FontSize="15" Background="white" Padding="0" Click="Button_Click_6">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="15"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Label Content="Время начала(HH/mm):" HorizontalAlignment="Left" Margin="1135,585,0,0" VerticalAlignment="Top"/>
-        <TextBox Background="White" x:Name="TextBoxTime" Text=""  HorizontalAlignment="Left" Height="24" TextWrapping="Wrap"  VerticalAlignment="Top" Width="124" Margin="1279,586,0,0"  FontSize="15">
+        <Label Content="Время начала(HH:mm):" HorizontalAlignment="Left" Margin="1135,618,0,0" VerticalAlignment="Top"/>
+        <TextBox Background="White" x:Name="TextBoxTime" Text=""  HorizontalAlignment="Left" Height="24" TextWrapping="Wrap"  VerticalAlignment="Top" Width="124" Margin="1279,619,0,0"  FontSize="15">
             <TextBox.Template>
                 <ControlTemplate>
                     <Border CornerRadius="12" Padding="2" BorderThickness="1" BorderBrush="#000000" Background="White">
@@ -243,6 +252,17 @@
                 </ControlTemplate>
             </TextBox.Template>
         </TextBox>
+        <Label Content="Изображение:" HorizontalAlignment="Left" Margin="839,705,0,0" VerticalAlignment="Top"/>
+        <Image HorizontalAlignment="Left" Name="ServiceImage" Height="60" Margin="965,691,0,0" VerticalAlignment="Top" Width="60"/>
+        <Button Name="SelectImage"  Content="Выбрать изображение" HorizontalAlignment="Left" Margin="1180,706,0,0" VerticalAlignment="Top" Width="223" Height="25" IsDefault="True" Foreground="Black" FontSize="15" Background="white" Padding="0" Click="SelectImage_Click"  >
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <Label Content="Название:" HorizontalAlignment="Left" Margin="839,465,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Page>

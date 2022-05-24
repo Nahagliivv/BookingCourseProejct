@@ -1,0 +1,29 @@
+﻿<Page x:Class="ServiceBookingCourseProject.Views.MyProfilePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ServiceBookingCourseProject.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="900" d:DesignWidth="1440"
+      Title="MyProfilePage">
+
+    <Grid Background="#ECF7F5">
+        <Label Content="Label" Name="LabelFullName"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="82,80,0,0" FontSize="50"/>
+        <Label Content="Label" x:Name="LabelEmail"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="82,186,0,0" FontSize="50"/>
+        <Label Content="Баланс(руб):" x:Name="LabelEmail_Copy"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="82,302,0,0" FontSize="50"/>
+        <Label Content="Баланс" x:Name="LabelBalance"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="378,302,0,0" FontSize="50"/>
+        <ListView  Margin="82,506,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="312" Width="710" ItemsSource="{Binding ListServices}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="300" Header="Название"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding StartDate}" Width="200" Header="Дата начала"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Price}" Width="200" Header="Цена(руб.)"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label Content="Забронированные места:" x:Name="LabelEmail_Copy1"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="82,391,0,0" FontSize="50"/>
+        <Label Content="Мой профиль" x:Name="LabelFullName_Copy"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,80,210,0" FontSize="50"/>
+
+    </Grid>
+</Page>

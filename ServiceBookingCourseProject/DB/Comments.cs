@@ -18,6 +18,7 @@ namespace ServiceBookingCourseProject.DB
         public int ServiceID { get; set; }
         public int UserID { get; set; }
         public string Text { get; set; }
+        public System.DateTime PublicDate { get; set; }
     
         public virtual Users Users { get; set; }
         public virtual Services Services { get; set; }

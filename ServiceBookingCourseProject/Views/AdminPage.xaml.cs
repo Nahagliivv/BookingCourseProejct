@@ -1,4 +1,5 @@
-﻿using ServiceBookingCourseProject.DB;
+﻿using Microsoft.Win32;
+using ServiceBookingCourseProject.DB;
 using ServiceBookingCourseProject.Logic;
 using ServiceBookingCourseProject.Models;
 using System;
@@ -16,6 +17,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using System.Windows.Resources;
 using System.Windows.Shapes;
 
 namespace ServiceBookingCourseProject.Views
@@ -35,6 +37,10 @@ namespace ServiceBookingCourseProject.Views
         public ServicesTypes SelectedTypeService { get; set; }
         public Services SelectedService { get; set; }
         public BookingRequests SelectedBookingRequest { get; set; }
+        string defaultIMG = "pack://application:,,,/Styles/DefaultImg.jpg";
+        byte[] editImg;
+        byte[] saveImg;
+        StreamResourceInfo img;
         public AdminPage(EnterWindow entwnd)
         {
             InitializeComponent();
@@ -46,6 +52,7 @@ namespace ServiceBookingCourseProject.Views
             DataContext = this;
             TimePickerStartDate.Text = DateTime.Today.ToString();
             InitLists();
+            ImageInit();
         }
         void InitLists()
         {
@@ -105,19 +112,23 @@ namespace ServiceBookingCourseProject.Views
         //поиск пользователей
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            ListUsers.Clear();
-            searchReg = new Regex(TextBоxSearchUsers.Text);
-            using(var db = new BookingDBEntities())
+            try
             {
-                foreach (var user in db.Users)
+                ListUsers.Clear();
+                searchReg = new Regex(TextBоxSearchUsers.Text);
+                using (var db = new BookingDBEntities())
                 {
-                    if(user.ID == StaticData.CurrentUser.ID) { continue; }
-                    if (searchReg.IsMatch(ToStringDBEntities.UserToString(user)) )
+                    foreach (var user in db.Users)
                     {
-                        ListUsers.Add(user);
+                        if (user.ID == StaticData.CurrentUser.ID) { continue; }
+                        if (searchReg.IsMatch(ToStringDBEntities.UserToString(user)))
+                        {
+                            ListUsers.Add(user);
+                        }
                     }
                 }
             }
+            catch { MessageBox.Show("Неверный формат строки"); }
         }
         //добавить вид услуги
         private void Button_Click_3(object sender, RoutedEventArgs e)
@@ -148,22 +159,27 @@ namespace ServiceBookingCourseProject.Views
         //Поиск вида услуги
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
-            ListServicesTypes.Clear();
-            searchReg = new Regex(TextBоxServiceTypeSearch.Text);
-            using (var db = new BookingDBEntities())
+            try
             {
-                foreach (var type in db.ServicesTypes)
+                ListServicesTypes.Clear();
+                searchReg = new Regex(TextBоxServiceTypeSearch.Text);
+                using (var db = new BookingDBEntities())
                 {
-                    if (searchReg.IsMatch(ToStringDBEntities.ServicesTypesToString(type)))
+                    foreach (var type in db.ServicesTypes)
                     {
-                        ListServicesTypes.Add(type);
+                        if (searchReg.IsMatch(ToStringDBEntities.ServicesTypesToString(type)))
+                        {
+                            ListServicesTypes.Add(type);
+                        }
                     }
                 }
             }
+            catch { MessageBox.Show("Неверный формат строки"); }
         }
         //Добавление услуги
         private void Button_Click_6(object sender, RoutedEventArgs e)
         {
+            if (TextBоxName.Text == "") { MessageBox.Show("Название сервиса не может быть пустой строкой"); return; }
             if (TextBоxDescriptionService.Text == "") { MessageBox.Show("Описание сервиса не может быть пустой строкой"); return; }
             int typeServId = 0;
             int capacityHuman = 0;
@@ -198,7 +214,7 @@ namespace ServiceBookingCourseProject.Views
                     startTime = DateTime.ParseExact(TimePickerStartDate.Text + " " + TextBoxTime.Text + ":00", "dd.MM.yyyy HH:mm:ss", null);
                 }
                 catch { MessageBox.Show("Неверный формат времени"); return; }
-                Services newService = new Services() { Capacity = capacityHuman,Price = price, Type = typeServId, Description = TextBоxDescriptionService.Text, StartDate = startTime};
+                Services newService = new Services() {Name = TextBоxName.Text, Capacity = capacityHuman,Price = price, Type = typeServId, Description = TextBоxDescriptionService.Text, StartDate = startTime, IMG = editImg};
                 db.Services.Add(newService);
                 db.SaveChanges();
                 MessageBox.Show("Сервис успешно добавлен");
@@ -208,30 +224,35 @@ namespace ServiceBookingCourseProject.Views
         private void Button_Click_7(object sender, RoutedEventArgs e)
         {
             if (SelectedService == null) { MessageBox.Show("Услуга для удаления не выбрана"); return; }
-            int countInTable = 0;
             using(var db = new BookingDBEntities())
             {
                 while (db.Comments.Count(x => x.ServiceID == SelectedService.ID) != 0)
                 {
+                    db.SaveChanges();
                     foreach (var x in db.Comments.Where(x => x.ServiceID == SelectedService.ID))
                     {
                         db.Comments.Remove(x);
+                       
                         break;
                     }
                 }
                 while (db.BookedServices.Count(x => x.ServiceID == SelectedService.ID) != 0)
                 {
+                    db.SaveChanges();
                     foreach (var x in db.BookedServices.Where(x => x.ServiceID == SelectedService.ID))
                     {
                         db.BookedServices.Remove(x);
+                   
                         break;
                     }
                 }
                 while (db.BookingRequests.Count(x => x.ServiceID == SelectedService.ID) != 0)
                 {
+                    db.SaveChanges();
                     foreach (var x in db.BookingRequests.Where(x => x.ServiceID == SelectedService.ID))
                     {
                         db.BookingRequests.Remove(x);
+                       
                         break;
                     }
                 }
@@ -241,12 +262,13 @@ namespace ServiceBookingCourseProject.Views
                     db.SaveChanges();
                     MessageBox.Show("Услуга успешно удалена");
                     entwnd.Mainframe.Content = new AdminPage(entwnd);
-                } catch { MessageBox.Show("Ошибка при удалении выбранной услуги"); return; }
+                } catch { MessageBox.Show("Ошибка при удалении услуги"); return; }
             }
         }
         //найти услугу
         private void Button_Click_8(object sender, RoutedEventArgs e)
         {
+            try { 
             ListServices.Clear();
             searchReg = new Regex(TextBоxServicesSearch.Text);
             using (var db = new BookingDBEntities())
@@ -258,7 +280,8 @@ namespace ServiceBookingCourseProject.Views
                         ListServices.Add(service);
                     }
                 }
-            }
+            } }
+            catch { MessageBox.Show("Неверный формат строки"); }
         }
         //подтвердить запрос
         private void Button_Click_9(object sender, RoutedEventArgs e)
@@ -280,6 +303,7 @@ namespace ServiceBookingCourseProject.Views
             if (SelectedBookingRequest == null) { MessageBox.Show("Запрос для отклонения не выбран"); return; }
             using (var db = new BookingDBEntities())
             {
+                db.BookingRequests.Attach(SelectedBookingRequest);
                 db.BookingRequests.Remove(SelectedBookingRequest);
                 var selServ = db.Services.FirstOrDefault(x=>x.ID == SelectedBookingRequest.ServiceID);
                 db.Users.FirstOrDefault(x => x.ID == SelectedBookingRequest.UserID).balance+=selServ.Price;
@@ -291,6 +315,7 @@ namespace ServiceBookingCourseProject.Views
         //поиск запроса на бронирование
         private void Button_Click_11(object sender, RoutedEventArgs e)
         {
+            try { 
             ListBookingRequests.Clear();
             searchReg = new Regex(TextBоxBookingServiceSearch.Text);
             using (var db = new BookingDBEntities())
@@ -302,6 +327,41 @@ namespace ServiceBookingCourseProject.Views
                         ListBookingRequests.Add(bReq);
                     }
                 }
+            } }
+            catch { MessageBox.Show("Неверный формат строки"); }
+        }
+        //инициализация изображения
+        void ImageInit()
+        {
+            try
+            {
+                ServiceImage.Source = new BitmapImage(new Uri(defaultIMG));
+                img = System.Windows.Application.GetResourceStream(new Uri(defaultIMG));
+                editImg = PictureLogic.ReadFully(img.Stream);
+                saveImg = PictureLogic.ReadFully(img.Stream);
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка инициализации изображения"); return;
+            }
+        }
+        //выбор изображения
+        private void SelectImage_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {   //открытие диалоговог окна
+                OpenFileDialog openwnd = new OpenFileDialog
+                {
+                    Filter = "Image files(*.png)|*.png|Image files(*.jpg)|*.jpg"
+                };
+                openwnd.ShowDialog();
+                editImg = PictureLogic.PictureToByte(openwnd.FileName);
+                ServiceImage.Source = new BitmapImage(new Uri(openwnd.FileName));
+            }
+            catch
+            {
+                editImg = saveImg;
+                return;
             }
         }
     }

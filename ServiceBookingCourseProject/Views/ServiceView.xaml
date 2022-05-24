@@ -5,8 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ServiceBookingCourseProject.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+             d:DesignHeight="400" d:DesignWidth="300">
+    <Grid Background="#ECF7F5" Height="400" Width="300">
+        <Image  Source="{Binding IMG}" Width="290" Margin="5,11,5,121" />
+        <Label Name="LabelBeginTime" Content="{Binding BeginTime}" HorizontalAlignment="Left" Margin="68,313,0,0" VerticalAlignment="Top"/>
+        <Label Name="LabelName" Content="{Binding NameService, Mode=TwoWay}" HorizontalAlignment="Left" Margin="10,344,0,0" VerticalAlignment="Top" FontSize="15" />
+        <Label x:Name="LabelBeginTime_Copy" Content="Начало:" HorizontalAlignment="Left" Margin="10,313,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="LabelBeginTime_Copy1" Content="Подробнее" HorizontalAlignment="Left" Margin="217,364,0,0" VerticalAlignment="Top" Command="{Binding MoreButton}" Foreground="Blue" Background="#ECF7F5" BorderThickness="0"/>
+
     </Grid>
 </UserControl>

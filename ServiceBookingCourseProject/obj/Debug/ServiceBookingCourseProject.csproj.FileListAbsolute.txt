@@ -32,3 +32,15 @@ C:\Users\Mark\Desktop\ServiceBookingCourseProject\ServiceBookingCourseProject\ob
 C:\Users\Mark\Desktop\ServiceBookingCourseProject\ServiceBookingCourseProject\obj\Debug\Views\AdminPage.baml
 C:\Users\Mark\Desktop\ServiceBookingCourseProject\ServiceBookingCourseProject\obj\Debug\Views\ServicesPage.baml
 C:\Users\Mark\Desktop\ServiceBookingCourseProject\ServiceBookingCourseProject\obj\Debug\Views\ServiceView.baml
+C:\Users\Mark\Desktop\ServiceBookingCourseProject\ServiceBookingCourseProject\obj\Debug\Views\MyProfilePage.g.cs
+C:\Users\Mark\Desktop\ServiceBookingCourseProject\ServiceBookingCourseProject\obj\Debug\Views\MyProfilePage.baml
+C:\Users\Mark\Desktop\ServiceBookingCourseProject\ServiceBookingCourseProject\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Mark\Desktop\ServiceBookingCourseProject\ServiceBookingCourseProject\obj\Debug\Styles\NonSelectedListViews.baml
+C:\Users\Mark\Desktop\ServiceBookingCourseProject\ServiceBookingCourseProject\obj\Debug\Views\MoreInfWindow.g.cs
+C:\Users\Mark\Desktop\ServiceBookingCourseProject\ServiceBookingCourseProject\obj\Debug\Views\MoreInfWindow.baml
+C:\Users\Mark\Desktop\ServiceBookingCourseProject\ServiceBookingCourseProject\obj\Debug\Views\CommentsWindow.g.cs
+C:\Users\Mark\Desktop\ServiceBookingCourseProject\ServiceBookingCourseProject\obj\Debug\Views\CommentView.g.cs
+C:\Users\Mark\Desktop\ServiceBookingCourseProject\ServiceBookingCourseProject\obj\Debug\Views\CommentView.baml
+C:\Users\Mark\Desktop\ServiceBookingCourseProject\ServiceBookingCourseProject\obj\Debug\Views\CommentsWindow.baml
+C:\Users\Mark\Desktop\ServiceBookingCourseProject\ServiceBookingCourseProject\obj\Debug\Views\SelectBookingCountWindow.g.cs
+C:\Users\Mark\Desktop\ServiceBookingCourseProject\ServiceBookingCourseProject\obj\Debug\Views\SelectBookingCountWindow.baml

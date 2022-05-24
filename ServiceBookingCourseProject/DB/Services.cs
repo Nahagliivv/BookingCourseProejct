@@ -28,6 +28,8 @@ namespace ServiceBookingCourseProject.DB
         public int Capacity { get; set; }
         public decimal Price { get; set; }
         public System.DateTime StartDate { get; set; }
+        public string Name { get; set; }
+        public byte[] IMG { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BookedServices> BookedServices { get; set; }

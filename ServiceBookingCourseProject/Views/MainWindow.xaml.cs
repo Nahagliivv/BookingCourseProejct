@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServiceBookingCourseProject.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,9 @@ namespace ServiceBookingCourseProject.Views
         public MainWindow()
         {
             InitializeComponent();
+            Mainframe.Content = new ServicesPage(this);
         }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             App.Current.MainWindow.WindowState = System.Windows.WindowState.Minimized;
@@ -31,6 +34,24 @@ namespace ServiceBookingCourseProject.Views
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             App.Current.Shutdown();
+        }
+        //Выход
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            StaticData.CurrentUser = null;
+            App.Current.MainWindow.Hide();
+            App.Current.MainWindow = new EnterWindow();
+            App.Current.MainWindow.Show();
+        }
+        //Мой профиль
+        private void MyProfileButton_Click(object sender, RoutedEventArgs e)
+        {
+            Mainframe.Content = new MyProfilePage(this);
+        }
+        //Услуги
+        private void ServicesButton_Click(object sender, RoutedEventArgs e)
+        {
+            Mainframe.Content = new ServicesPage(this);
         }
     }
 }

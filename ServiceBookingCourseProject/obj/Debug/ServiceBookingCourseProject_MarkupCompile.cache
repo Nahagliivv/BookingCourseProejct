@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Mark\Desktop\ServiceBookingCourseProject\ServiceBookingCourseProject\App.xaml
-7-1903530188
+13-1382761428
 21885946577
-23-1886629684
+31-414535864
 18-1668631807
-Views\AdminPage.xaml;Views\EnterWindow.xaml;Views\LoginPage.xaml;Views\MainWindow.xaml;Views\RegistrationPage.xaml;Views\ServicesPage.xaml;Views\ServiceView.xaml;
+Styles\NonSelectedListViews.xaml;Views\AdminPage.xaml;Views\CommentsWindow.xaml;Views\CommentView.xaml;Views\EnterWindow.xaml;Views\LoginPage.xaml;Views\MainWindow.xaml;Views\MoreInfWindow.xaml;Views\MyProfilePage.xaml;Views\RegistrationPage.xaml;Views\SelectBookingCountWindow.xaml;Views\ServicesPage.xaml;Views\ServiceView.xaml;
 
 False
 

@@ -37,6 +37,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Logo.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
@@ -104,11 +107,20 @@
     <Compile Include="DB\Users.cs">
       <DependentUpon>ModelBooking.tt</DependentUpon>
     </Compile>
+    <Compile Include="Logic\DelegateCommand.cs" />
     <Compile Include="Logic\HashPassword.cs" />
+    <Compile Include="Logic\PictureLogic.cs" />
+    <Compile Include="Logic\ServiceViewLogic.cs" />
     <Compile Include="Logic\ToStringDBEntities.cs" />
     <Compile Include="Models\StaticData.cs" />
     <Compile Include="Views\AdminPage.xaml.cs">
       <DependentUpon>AdminPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CommentsWindow.xaml.cs">
+      <DependentUpon>CommentsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CommentView.xaml.cs">
+      <DependentUpon>CommentView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EnterWindow.xaml.cs">
       <DependentUpon>EnterWindow.xaml</DependentUpon>
@@ -119,8 +131,17 @@
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MoreInfWindow.xaml.cs">
+      <DependentUpon>MoreInfWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MyProfilePage.xaml.cs">
+      <DependentUpon>MyProfilePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RegistrationPage.xaml.cs">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectBookingCountWindow.xaml.cs">
+      <DependentUpon>SelectBookingCountWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ServicesPage.xaml.cs">
       <DependentUpon>ServicesPage.xaml</DependentUpon>
@@ -164,7 +185,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Styles\NonSelectedListViews.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AdminPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CommentsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CommentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -180,7 +213,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\MoreInfWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MyProfilePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\RegistrationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SelectBookingCountWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -210,6 +255,8 @@
       <DependentUpon>ModelBooking.edmx</DependentUpon>
       <LastGenOutput>ModelBooking.cs</LastGenOutput>
     </Content>
+    <Resource Include="Logo.ico" />
+    <Resource Include="Styles\DefaultImg.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -30,6 +30,7 @@
     <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="Users" Relationship="Self.fk_comm1" FromRole="Comments" ToRole="Users" />
     <NavigationProperty Name="Services" Relationship="Self.fk_comm2" FromRole="Comments" ToRole="Services" />
+    <Property Name="PublicDate" Type="DateTime" Nullable="false" Precision="7" />
   </EntityType>
   <EntityType Name="Services">
     <Key>
@@ -40,11 +41,13 @@
     <Property Name="Type" Type="Int32" Nullable="false" />
     <Property Name="Capacity" Type="Int32" Nullable="false" />
     <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="7" />
     <NavigationProperty Name="BookedServices" Relationship="Self.fk_bksrvcs2" FromRole="Services" ToRole="BookedServices" />
     <NavigationProperty Name="BookingRequests" Relationship="Self.fk_bkr2" FromRole="Services" ToRole="BookingRequests" />
     <NavigationProperty Name="Comments" Relationship="Self.fk_comm2" FromRole="Services" ToRole="Comments" />
     <NavigationProperty Name="ServicesTypes" Relationship="Self.fk_srvcs1" FromRole="Services" ToRole="ServicesTypes" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IMG" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="ServicesTypes">
     <Key>

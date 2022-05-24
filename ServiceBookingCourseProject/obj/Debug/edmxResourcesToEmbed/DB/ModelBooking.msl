@@ -22,6 +22,7 @@
     <EntitySetMapping Name="Comments">
       <EntityTypeMapping TypeName="BookingDBModel.Comments">
         <MappingFragment StoreEntitySet="Comments">
+          <ScalarProperty Name="PublicDate" ColumnName="PublicDate" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -32,6 +33,8 @@
     <EntitySetMapping Name="Services">
       <EntityTypeMapping TypeName="BookingDBModel.Services">
         <MappingFragment StoreEntitySet="Services">
+          <ScalarProperty Name="IMG" ColumnName="IMG" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Type" ColumnName="Type" />

@@ -7,7 +7,14 @@
         mc:Ignorable="d"
         Title="EnterWindow" ResizeMode="NoResize" Height="900" Width="1440" WindowState="Maximized" WindowStyle="None">
     <Grid>
-        <Grid Background="#3c3c3c" Height="40" VerticalAlignment="Top" Width="Auto" Grid.ColumnSpan="2"/>
+
+        <Grid Background="#3c3c3c" Height="40" VerticalAlignment="Top" Width="Auto" Grid.ColumnSpan="2">
+            <Grid HorizontalAlignment="Left" Width="478" VerticalAlignment="Center" Height="40" Name="GridControl">
+                <Button Background="#3c3c3c" Name="ExitButton" Foreground="White" Content="Выход" HorizontalAlignment="Left" VerticalAlignment="Center" Width="92" Height="40" Click="ExitButton_Click" />
+                <Button Background="#3c3c3c" x:Name="MyProfileButton" Foreground="White" Content="Мой профиль" HorizontalAlignment="Left" VerticalAlignment="Center" Width="92" Height="40" Margin="92,0,0,0" Click="MyProfileButton_Click"/>
+                <Button Background="#3c3c3c" x:Name="ServicesButton" Foreground="White" Content="Услуги" HorizontalAlignment="Left" VerticalAlignment="Center" Width="92" Height="40" Margin="184,0,0,0" Click="ServicesButton_Click"/>
+            </Grid>
+        </Grid>
         <Button Background="White" Content="X" HorizontalAlignment="Right" VerticalAlignment="Top" Width="23" BorderBrush="Black" Margin="0,7,6,0" Height="25" Padding="0,0,0,0" Foreground="Black" Grid.ColumnSpan="2" Click="Button_Click_1"/>
         <Button Background="White" Content="_" VerticalContentAlignment="Top" HorizontalAlignment="Right" VerticalAlignment="Top" Width="23" BorderBrush="Black" Margin="0,7,35,0" Height="25" Padding="0,0,0,0" Foreground="Black" Click="Button_Click"/>
         <Frame Name="Mainframe" NavigationUIVisibility="Hidden" Margin="0,40,0,0" Grid.ColumnSpan="2">

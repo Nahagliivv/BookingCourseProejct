@@ -1,0 +1,39 @@
+﻿<Window x:Class="ServiceBookingCourseProject.Views.MoreInfWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ServiceBookingCourseProject.Views"
+        mc:Ignorable="d"
+        Title="Подробнее" Height="472" Width="800" ResizeMode="NoResize" >
+    <Grid Width="800" Margin="0,0,0,-6">
+
+        <Image  Margin="10,15,443,77" Name="IMG" />
+        <Label Name="LabelName" Content="Название" HorizontalAlignment="Left" Margin="365,31,0,0" VerticalAlignment="Top" FontSize="25" />
+        <Label Name="LabelType" Content="Тип" HorizontalAlignment="Left" Margin="365,73,0,0" VerticalAlignment="Top" FontSize="20" />
+        <Label  Content="Начало:" HorizontalAlignment="Left" Margin="365,115,0,0" VerticalAlignment="Top" FontSize="20" />
+        <Label  Name="LabelBeginTime" Content="начало" HorizontalAlignment="Left" Margin="476,115,0,0" VerticalAlignment="Top" FontSize="20" />
+        <Label Content="Мест:" HorizontalAlignment="Left" Margin="365,153,0,0" VerticalAlignment="Top" FontSize="20" />
+        <Label Content="Свободно:" HorizontalAlignment="Left" Margin="365,189,0,0" VerticalAlignment="Top" FontSize="20" />
+        <Label Name="LabelCapacity" Content="мест" HorizontalAlignment="Left" Margin="476,153,0,0" VerticalAlignment="Top" FontSize="20" />
+        <Label Name="LabelFreePlaces" Content="свободно" HorizontalAlignment="Left" Margin="476,189,0,0" VerticalAlignment="Top" FontSize="20" />
+        <Label Content="Цена(руб):" HorizontalAlignment="Left" Margin="365,227,0,0" VerticalAlignment="Top" FontSize="20" />
+        <Label Name="LabelPrice" Content="цена" HorizontalAlignment="Left" Margin="476,227,0,0" VerticalAlignment="Top" FontSize="20" />
+        <TextBox BorderThickness="0" x:Name="TextBoxDescription" HorizontalAlignment="Left" Margin="368,269,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="395" FontSize="20" IsReadOnly="True" Height="112"/>
+        <Button Content="Забронировать" HorizontalAlignment="Left" Margin="590,385,0,0" VerticalAlignment="Top" Width="173" Height="40" Foreground="White" FontSize="20" Background="Black" Padding="0" Click="Button_Click_1">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button Content="Комментарии" HorizontalAlignment="Left" Margin="368,385,0,0" VerticalAlignment="Top" Width="217" Height="40" Foreground="White" FontSize="20" Background="#EE802A" Padding="0" Click="Button_Click">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+    </Grid>
+</Window>

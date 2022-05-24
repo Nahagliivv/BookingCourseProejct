@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище BookingDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище BookingDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BookedServices">
           <Key>
             <PropertyRef Name="ID" />
@@ -28,6 +28,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ServiceID" Type="int" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="PublicDate" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Services">
@@ -35,11 +36,13 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="Capacity" Type="int" Nullable="false" />
           <Property Name="Price" Type="money" Nullable="false" />
-          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="IMG" Type="varbinary(max)" />
+          <Property Name="StartDate" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
         <EntityType Name="ServicesTypes">
           <Key>
@@ -179,8 +182,7 @@
             <End Role="Services" EntitySet="Services" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BookingDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -214,6 +216,7 @@
           <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Users" Relationship="Self.fk_comm1" FromRole="Comments" ToRole="Users" />
           <NavigationProperty Name="Services" Relationship="Self.fk_comm2" FromRole="Comments" ToRole="Services" />
+          <Property Name="PublicDate" Type="DateTime" Nullable="false" Precision="7" />
         </EntityType>
         <EntityType Name="Services">
           <Key>
@@ -224,11 +227,13 @@
           <Property Name="Type" Type="Int32" Nullable="false" />
           <Property Name="Capacity" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="7" />
           <NavigationProperty Name="BookedServices" Relationship="Self.fk_bksrvcs2" FromRole="Services" ToRole="BookedServices" />
           <NavigationProperty Name="BookingRequests" Relationship="Self.fk_bkr2" FromRole="Services" ToRole="BookingRequests" />
           <NavigationProperty Name="Comments" Relationship="Self.fk_comm2" FromRole="Services" ToRole="Comments" />
           <NavigationProperty Name="ServicesTypes" Relationship="Self.fk_srvcs1" FromRole="Services" ToRole="ServicesTypes" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IMG" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="ServicesTypes">
           <Key>
@@ -399,6 +404,7 @@
           <EntitySetMapping Name="Comments">
             <EntityTypeMapping TypeName="BookingDBModel.Comments">
               <MappingFragment StoreEntitySet="Comments">
+                <ScalarProperty Name="PublicDate" ColumnName="PublicDate" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -409,6 +415,8 @@
           <EntitySetMapping Name="Services">
             <EntityTypeMapping TypeName="BookingDBModel.Services">
               <MappingFragment StoreEntitySet="Services">
+                <ScalarProperty Name="IMG" ColumnName="IMG" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
