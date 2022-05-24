@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BookingDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="BookedServices">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="ServiceID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="Self.fk_bksrvcs1" FromRole="BookedServices" ToRole="Users" />
+    <NavigationProperty Name="Services" Relationship="Self.fk_bksrvcs2" FromRole="BookedServices" ToRole="Services" />
+  </EntityType>
+  <EntityType Name="BookingRequests">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="ServiceID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="Self.fk_bkr1" FromRole="BookingRequests" ToRole="Users" />
+    <NavigationProperty Name="Services" Relationship="Self.fk_bkr2" FromRole="BookingRequests" ToRole="Services" />
+  </EntityType>
+  <EntityType Name="Comments">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ServiceID" Type="Int32" Nullable="false" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="Self.fk_comm1" FromRole="Comments" ToRole="Users" />
+    <NavigationProperty Name="Services" Relationship="Self.fk_comm2" FromRole="Comments" ToRole="Services" />
+  </EntityType>
+  <EntityType Name="Services">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Type" Type="Int32" Nullable="false" />
+    <Property Name="Capacity" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="BookedServices" Relationship="Self.fk_bksrvcs2" FromRole="Services" ToRole="BookedServices" />
+    <NavigationProperty Name="BookingRequests" Relationship="Self.fk_bkr2" FromRole="Services" ToRole="BookingRequests" />
+    <NavigationProperty Name="Comments" Relationship="Self.fk_comm2" FromRole="Services" ToRole="Comments" />
+    <NavigationProperty Name="ServicesTypes" Relationship="Self.fk_srvcs1" FromRole="Services" ToRole="ServicesTypes" />
+  </EntityType>
+  <EntityType Name="ServicesTypes">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Services" Relationship="Self.fk_srvcs1" FromRole="ServicesTypes" ToRole="Services" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FullName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="HashPassword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsAdministrator" Type="Boolean" Nullable="false" />
+    <Property Name="balance" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <NavigationProperty Name="BookedServices" Relationship="Self.fk_bksrvcs1" FromRole="Users" ToRole="BookedServices" />
+    <NavigationProperty Name="BookingRequests" Relationship="Self.fk_bkr1" FromRole="Users" ToRole="BookingRequests" />
+    <NavigationProperty Name="Comments" Relationship="Self.fk_comm1" FromRole="Users" ToRole="Comments" />
+  </EntityType>
+  <Association Name="fk_bksrvcs1">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="BookedServices" Type="Self.BookedServices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BookedServices">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_bksrvcs2">
+    <End Role="Services" Type="Self.Services" Multiplicity="1" />
+    <End Role="BookedServices" Type="Self.BookedServices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Services">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BookedServices">
+        <PropertyRef Name="ServiceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_bkr1">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="BookingRequests" Type="Self.BookingRequests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BookingRequests">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_bkr2">
+    <End Role="Services" Type="Self.Services" Multiplicity="1" />
+    <End Role="BookingRequests" Type="Self.BookingRequests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Services">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BookingRequests">
+        <PropertyRef Name="ServiceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_comm1">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_comm2">
+    <End Role="Services" Type="Self.Services" Multiplicity="1" />
+    <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Services">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="ServiceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_srvcs1">
+    <End Role="ServicesTypes" Type="Self.ServicesTypes" Multiplicity="1" />
+    <End Role="Services" Type="Self.Services" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServicesTypes">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Services">
+        <PropertyRef Name="Type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BookingDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BookedServices" EntityType="Self.BookedServices" />
+    <EntitySet Name="BookingRequests" EntityType="Self.BookingRequests" />
+    <EntitySet Name="Comments" EntityType="Self.Comments" />
+    <EntitySet Name="Services" EntityType="Self.Services" />
+    <EntitySet Name="ServicesTypes" EntityType="Self.ServicesTypes" />
+    <EntitySet Name="Users" EntityType="Self.Users" />
+    <AssociationSet Name="fk_bksrvcs1" Association="Self.fk_bksrvcs1">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="BookedServices" EntitySet="BookedServices" />
+    </AssociationSet>
+    <AssociationSet Name="fk_bksrvcs2" Association="Self.fk_bksrvcs2">
+      <End Role="Services" EntitySet="Services" />
+      <End Role="BookedServices" EntitySet="BookedServices" />
+    </AssociationSet>
+    <AssociationSet Name="fk_bkr1" Association="Self.fk_bkr1">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="BookingRequests" EntitySet="BookingRequests" />
+    </AssociationSet>
+    <AssociationSet Name="fk_bkr2" Association="Self.fk_bkr2">
+      <End Role="Services" EntitySet="Services" />
+      <End Role="BookingRequests" EntitySet="BookingRequests" />
+    </AssociationSet>
+    <AssociationSet Name="fk_comm1" Association="Self.fk_comm1">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="fk_comm2" Association="Self.fk_comm2">
+      <End Role="Services" EntitySet="Services" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="fk_srvcs1" Association="Self.fk_srvcs1">
+      <End Role="ServicesTypes" EntitySet="ServicesTypes" />
+      <End Role="Services" EntitySet="Services" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

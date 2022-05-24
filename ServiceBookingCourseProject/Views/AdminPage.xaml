@@ -1,0 +1,248 @@
+﻿<Page x:Class="ServiceBookingCourseProject.Views.AdminPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ServiceBookingCourseProject.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="900" d:DesignWidth="1440"
+      Title="AdminPage">
+
+    <Grid Background="#ECF7F5">
+        <ListView  Margin="47,101,0,0" SelectedItem="{Binding SelectedUser}" ItemsSource="{Binding ListUsers, Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="312" Width="425">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn  DisplayMemberBinding="{Binding Path= ID}" Width="40">Id</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=FullName}" Width="160">ФИО</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Email}" Width="120">Email</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=balance}" Width="100">Баланс</GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label Content="Пользователи" HorizontalAlignment="Left" Margin="47,31,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <ListView  Margin="530,101,0,0" SelectedItem="{Binding SelectedTypeService}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="312" Width="246" ItemsSource="{Binding ListServicesTypes}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn  DisplayMemberBinding="{Binding Path= ID}" Width="40">Id</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Text}" Width="200">Вид услуги</GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label Content="Виды услуг" HorizontalAlignment="Left" Margin="530,31,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <ListView  Margin="839,101,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="312" Width="564" ItemsSource="{Binding ListServices}" SelectedItem="{Binding SelectedService}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn  DisplayMemberBinding="{Binding Path= ID}" Width="40">Id</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Description}" Width="160">Описание</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Type}" Width="60">Id Вида</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Capacity}" Width="110">Вместимость(чел.)</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=StartDate}" Width="110">Дата начала</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Price}" Width="90">Цена(руб.)</GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label Content="Услуги" HorizontalAlignment="Left" Margin="839,31,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <ListView  Margin="47,556,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="232" Width="286" SelectedItem="{Binding SelectedBookingRequest}" ItemsSource="{Binding ListBookingRequests}" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn  DisplayMemberBinding="{Binding ID}" Width="40" Header="Id"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding UserID}" Width="120" Header="Id пользователя"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding ServiceID}" Width="120" Header="Id услуги"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label Content="Запросы на бронирование услуг" HorizontalAlignment="Left" Margin="47,465,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <TextBox Background="White" x:Name="TextBоxSearchUsers"  HorizontalAlignment="Left" Height="25" TextWrapping="Wrap"  VerticalAlignment="Top" Width="338" Margin="47,73,0,0"  FontSize="15">
+            <TextBox.Template>
+                <ControlTemplate>
+                    <Border CornerRadius="12" Padding="2" BorderThickness="1" BorderBrush="#000000" Background="White">
+                        <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
+                    </Border>
+                </ControlTemplate>
+            </TextBox.Template>
+        </TextBox>
+        <TextBox Background="White" x:Name="TextBоxServiceTypeSearch" Text=""  HorizontalAlignment="Left" Height="25" TextWrapping="Wrap"  VerticalAlignment="Top" Width="159" Margin="530,73,0,0"  FontSize="15">
+            <TextBox.Template>
+                <ControlTemplate>
+                    <Border CornerRadius="12" Padding="2" BorderThickness="1" BorderBrush="#000000" Background="White">
+                        <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
+                    </Border>
+                </ControlTemplate>
+            </TextBox.Template>
+        </TextBox>
+        <TextBox Background="White" x:Name="TextBоxServicesSearch" Text=""  HorizontalAlignment="Left" Height="25" TextWrapping="Wrap"  VerticalAlignment="Top" Width="477" Margin="839,73,0,0"  FontSize="15">
+            <TextBox.Template>
+                <ControlTemplate>
+                    <Border CornerRadius="12" Padding="2" BorderThickness="1" BorderBrush="#000000" Background="White">
+                        <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
+                    </Border>
+                </ControlTemplate>
+            </TextBox.Template>
+        </TextBox>
+        <TextBox Background="White" x:Name="TextBоxBookingServiceSearch" Text=""  HorizontalAlignment="Left" Height="25" TextWrapping="Wrap"  VerticalAlignment="Top" Width="199" Margin="47,518,0,0"  FontSize="15">
+            <TextBox.Template>
+                <ControlTemplate>
+                    <Border CornerRadius="12" Padding="2" BorderThickness="1" BorderBrush="#000000" Background="White">
+                        <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
+                    </Border>
+                </ControlTemplate>
+            </TextBox.Template>
+        </TextBox>
+        <TextBox Background="White" x:Name="TextBоxServiceType" Text=""  HorizontalAlignment="Left" Height="25" TextWrapping="Wrap"  VerticalAlignment="Top" Width="144" Margin="632,472,0,0"  FontSize="15">
+            <TextBox.Template>
+                <ControlTemplate>
+                    <Border CornerRadius="12" Padding="2" BorderThickness="1" BorderBrush="#000000" Background="White">
+                        <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
+                    </Border>
+                </ControlTemplate>
+            </TextBox.Template>
+        </TextBox>
+        <Label Content="Вид услуги:" HorizontalAlignment="Left" Margin="530,470,0,0" VerticalAlignment="Top"/>
+        <Button  Content="Удалить выбранный вид услуги" HorizontalAlignment="Left" Margin="530,427,0,0" VerticalAlignment="Top" Width="246" Height="25" IsDefault="True" Foreground="Black" FontSize="15" Background="white" Padding="0" Click="Button_Click_4">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button  Content="Добавить вид услуги" HorizontalAlignment="Left" Margin="530,518,0,0" VerticalAlignment="Top" Width="246" Height="24" IsDefault="True" Foreground="Black" FontSize="15" Background="white" Padding="0" Click="Button_Click_3">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <TextBox Background="White" x:Name="TextBоxBalanceEdit" Text=""  HorizontalAlignment="Left" Height="25" TextWrapping="Wrap"  VerticalAlignment="Top" Width="86" Margin="47,425,0,0"  FontSize="15">
+            <TextBox.Template>
+                <ControlTemplate>
+                    <Border CornerRadius="12" Padding="2" BorderThickness="1" BorderBrush="#000000" Background="White">
+                        <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
+                    </Border>
+                </ControlTemplate>
+            </TextBox.Template>
+        </TextBox>
+        <Button  Content="+" HorizontalAlignment="Left" Margin="137,425,0,0" VerticalAlignment="Top" Width="32" Height="25" IsDefault="True" Foreground="Black" FontSize="15" Background="white" Padding="0" Click="Button_Click">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button  Content="-" HorizontalAlignment="Left" Margin="174,425,0,0" VerticalAlignment="Top" Width="32" Height="25" IsDefault="True" Foreground="Black" FontSize="15" Background="white" Padding="0" Click="Button_Click_1">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button  Content="Подтвердить запрос" HorizontalAlignment="Left" Margin="47,798,0,0" VerticalAlignment="Top" Width="286" Height="25" IsDefault="True" Foreground="Black" FontSize="15" Background="white" Padding="0" Click="Button_Click_9">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button  Content="Отклонить запрос(с возвратом средств)" HorizontalAlignment="Left" Margin="47,828,0,0" VerticalAlignment="Top" Width="286" Height="25" IsDefault="True" Foreground="Black" FontSize="15" Background="white" Padding="0" Click="Button_Click_10">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button  Content="Найти" HorizontalAlignment="Left" Margin="251,518,0,0" VerticalAlignment="Top" Width="82" Height="24" IsDefault="True" Foreground="Black" FontSize="15" Background="white" Padding="0" Click="Button_Click_11">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button  Content="Найти" HorizontalAlignment="Left" Margin="390,74,0,0" VerticalAlignment="Top" Width="82" Height="24" IsDefault="True" Foreground="Black" FontSize="15" Background="white" Padding="0" Click="Button_Click_2">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button  Content="Найти" HorizontalAlignment="Left" Margin="694,74,0,0" VerticalAlignment="Top" Width="82" Height="24" IsDefault="True" Foreground="Black" FontSize="15" Background="white" Padding="0" Click="Button_Click_5">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button  Content="Найти" HorizontalAlignment="Left" Margin="1321,72,0,0" VerticalAlignment="Top" Width="82" Height="24" IsDefault="True" Foreground="Black" FontSize="15" Background="white" Padding="0" Click="Button_Click_8">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <TextBox Background="White" x:Name="TextBоxDescriptionService" Text=""  HorizontalAlignment="Left" Height="25" TextWrapping="Wrap"  VerticalAlignment="Top" Width="453" Margin="950,470,0,0"  FontSize="15">
+            <TextBox.Template>
+                <ControlTemplate>
+                    <Border CornerRadius="12" Padding="2" BorderThickness="1" BorderBrush="#000000" Background="White">
+                        <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
+                    </Border>
+                </ControlTemplate>
+            </TextBox.Template>
+        </TextBox>
+        <Label Content="Описание услуги:" HorizontalAlignment="Left" Margin="839,468,0,0" VerticalAlignment="Top"/>
+        <Label Content="Id вида услуги:" HorizontalAlignment="Left" Margin="839,506,0,0" VerticalAlignment="Top"/>
+        <TextBox Background="White" x:Name="TextBоxTypeId" Text=""  HorizontalAlignment="Left" Height="25" TextWrapping="Wrap"  VerticalAlignment="Top" Width="98" Margin="950,508,0,0"  FontSize="15">
+            <TextBox.Template>
+                <ControlTemplate>
+                    <Border CornerRadius="12" Padding="2" BorderThickness="1" BorderBrush="#000000" Background="White">
+                        <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
+                    </Border>
+                </ControlTemplate>
+            </TextBox.Template>
+        </TextBox>
+        <Label Content="Вместимость(чел.):" HorizontalAlignment="Left" Margin="839,547,0,0" VerticalAlignment="Top"/>
+        <TextBox Background="White" x:Name="TextBоxCapacityHuman" Text=""  HorizontalAlignment="Left" Height="25" TextWrapping="Wrap"  VerticalAlignment="Top" Width="98" Margin="950,547,0,0"  FontSize="15">
+            <TextBox.Template>
+                <ControlTemplate>
+                    <Border CornerRadius="12" Padding="2" BorderThickness="1" BorderBrush="#000000" Background="White">
+                        <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
+                    </Border>
+                </ControlTemplate>
+            </TextBox.Template>
+        </TextBox>
+        <DatePicker HorizontalAlignment="Left" Name="TimePickerStartDate" Margin="950,586,0,0" VerticalAlignment="Top" Width="128"/>
+        <Label Content="Дата начала:" HorizontalAlignment="Left" Margin="839,584,0,0" VerticalAlignment="Top"/>
+        <Label Content="Цена(руб.):" HorizontalAlignment="Left" Margin="839,623,0,0" VerticalAlignment="Top"/>
+        <TextBox Background="White" x:Name="TextBoxPrice" Text=""  HorizontalAlignment="Left" Height="25" TextWrapping="Wrap"  VerticalAlignment="Top" Width="98" Margin="950,623,0,0"  FontSize="15">
+            <TextBox.Template>
+                <ControlTemplate>
+                    <Border CornerRadius="12" Padding="2" BorderThickness="1" BorderBrush="#000000" Background="White">
+                        <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
+                    </Border>
+                </ControlTemplate>
+            </TextBox.Template>
+        </TextBox>
+        <Button  Content="Удалить выбранную услугу(Все связи также)" HorizontalAlignment="Left" Margin="839,427,0,0" VerticalAlignment="Top" Width="564" Height="25" IsDefault="True" Foreground="Black" FontSize="15" Background="white" Padding="0" Click="Button_Click_7">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button  Content="Добавить услугу" HorizontalAlignment="Left" Margin="839,668,0,0" VerticalAlignment="Top" Width="564" Height="25" IsDefault="True" Foreground="Black" FontSize="15" Background="white" Padding="0" Click="Button_Click_6">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Label Content="Время начала(HH/mm):" HorizontalAlignment="Left" Margin="1135,585,0,0" VerticalAlignment="Top"/>
+        <TextBox Background="White" x:Name="TextBoxTime" Text=""  HorizontalAlignment="Left" Height="24" TextWrapping="Wrap"  VerticalAlignment="Top" Width="124" Margin="1279,586,0,0"  FontSize="15">
+            <TextBox.Template>
+                <ControlTemplate>
+                    <Border CornerRadius="12" Padding="2" BorderThickness="1" BorderBrush="#000000" Background="White">
+                        <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
+                    </Border>
+                </ControlTemplate>
+            </TextBox.Template>
+        </TextBox>
+
+    </Grid>
+</Page>
