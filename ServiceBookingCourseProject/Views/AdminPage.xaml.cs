@@ -286,7 +286,9 @@ namespace ServiceBookingCourseProject.Views
         //подтвердить запрос
         private void Button_Click_9(object sender, RoutedEventArgs e)
         {
-            if (SelectedBookingRequest == null) { MessageBox.Show("Запрос для подтверждения не выбран"); return; }
+            try
+            {
+                if (SelectedBookingRequest == null) { MessageBox.Show("Запрос для подтверждения не выбран"); return; }
             using(var db = new BookingDBEntities())
             {
                 db.BookedServices.Add(new BookedServices() { ServiceID = SelectedBookingRequest.ServiceID, UserID = SelectedBookingRequest.UserID});
@@ -296,21 +298,27 @@ namespace ServiceBookingCourseProject.Views
                 MessageBox.Show("Запрос успешно подтверждён");
                 entwnd.Mainframe.Content = new AdminPage(entwnd);
             }
+            }
+            catch { MessageBox.Show("Ошибка при подтверждении"); entwnd.Mainframe.Content = new AdminPage(entwnd); return; }
         }
         //отклонить запрос
         private void Button_Click_10(object sender, RoutedEventArgs e)
         {
-            if (SelectedBookingRequest == null) { MessageBox.Show("Запрос для отклонения не выбран"); return; }
-            using (var db = new BookingDBEntities())
+            try
             {
-                db.BookingRequests.Attach(SelectedBookingRequest);
-                db.BookingRequests.Remove(SelectedBookingRequest);
-                var selServ = db.Services.FirstOrDefault(x=>x.ID == SelectedBookingRequest.ServiceID);
-                db.Users.FirstOrDefault(x => x.ID == SelectedBookingRequest.UserID).balance+=selServ.Price;
-                db.SaveChanges();
-                MessageBox.Show("Запрос успешно отклонён");
-                entwnd.Mainframe.Content = new AdminPage(entwnd);
+                if (SelectedBookingRequest == null) { MessageBox.Show("Запрос для отклонения не выбран"); return; }
+                using (var db = new BookingDBEntities())
+                {
+                    db.BookingRequests.Attach(SelectedBookingRequest);
+                    db.BookingRequests.Remove(SelectedBookingRequest);
+                    var selServ = db.Services.FirstOrDefault(x => x.ID == SelectedBookingRequest.ServiceID);
+                    db.Users.FirstOrDefault(x => x.ID == SelectedBookingRequest.UserID).balance += selServ.Price;
+                    db.SaveChanges();
+                    MessageBox.Show("Запрос успешно отклонён");
+                    entwnd.Mainframe.Content = new AdminPage(entwnd);
+                }
             }
+            catch { MessageBox.Show("Ошибка при отклонении"); entwnd.Mainframe.Content = new AdminPage(entwnd); return; }
         }
         //поиск запроса на бронирование
         private void Button_Click_11(object sender, RoutedEventArgs e)

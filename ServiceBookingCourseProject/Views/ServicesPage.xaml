@@ -16,6 +16,7 @@
         </ResourceDictionary>
 
     </Page.Resources>
+
     <Grid>
         <Grid  HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0">
             <TextBox Background="White" x:Name="TextBоxServicesSearch" Text=""  HorizontalAlignment="Left" Height="25" TextWrapping="Wrap"  VerticalAlignment="Top" Width="783"  FontSize="15">
@@ -35,17 +36,19 @@
                 </Button.Resources>
             </Button>
         </Grid>
-        <ListBox ItemsSource="{Binding ServicesViewsList}" HorizontalAlignment="Center" Margin="0,40,0,10" Background="#ECF7F5" Height="840" ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderThickness="0" Width="954" >
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <local:ServiceView></local:ServiceView>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-        </ListBox>
+        <ScrollViewer>
+            <ListBox ItemsSource="{Binding ServicesViewsList}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,40,0,10" Background="#ECF7F5" Height="auto" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderThickness="0" Width="954" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <local:ServiceView></local:ServiceView>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+        </ScrollViewer>
     </Grid>
 </Page>
