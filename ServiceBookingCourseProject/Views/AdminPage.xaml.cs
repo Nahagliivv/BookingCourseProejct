@@ -289,9 +289,12 @@ namespace ServiceBookingCourseProject.Views
             try
             {
                 if (SelectedBookingRequest == null) { MessageBox.Show("Запрос для подтверждения не выбран"); return; }
-            using(var db = new BookingDBEntities())
-            {
-                db.BookedServices.Add(new BookedServices() { ServiceID = SelectedBookingRequest.ServiceID, UserID = SelectedBookingRequest.UserID});
+                using (var db = new BookingDBEntities())
+                {
+                    if (db.BookedServices.Count(x => x.ServiceID == SelectedBookingRequest.ServiceID)+1-db.Services.FirstOrDefault(x=>x.ID == SelectedBookingRequest.ServiceID).Capacity<0) {
+                        MessageBox.Show("В выбранном сервисе больше нет мест"); return;
+                    }
+                db.BookedServices.Add(new BookedServices() { ServiceID = SelectedBookingRequest.ServiceID, UserID = SelectedBookingRequest.UserID });
                 db.BookingRequests.Attach(SelectedBookingRequest);
                 db.BookingRequests.Remove(SelectedBookingRequest);
                 db.SaveChanges();
